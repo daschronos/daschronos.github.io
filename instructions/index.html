@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Images in Markdown - A Complete Guide</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --background-color: #ffffff;
+            --code-background: #f3f4f6;
+            --border-color: #e5e7eb;
+            --warning-background: #fff7ed;
+            --warning-border: #fdba74;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--background-color);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        pre {
+            background-color: var(--code-background);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Monaco', 'Consolas', monospace;
+            background-color: var(--code-background);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            padding: 0;
+            background: none;
+        }
+
+        .example {
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            background-color: var(--code-background);
+        }
+
+        .warning {
+            background-color: var(--warning-background);
+            border: 1px solid var(--warning-border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--code-background);
+        }
+
+        ul,
+        ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            transition: background-color 0.2s;
+        }
+
+        .tool-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Base64 Images in Markdown: A Complete Guide</h1>
+
+    <h2 id="about">What are Base64 Images?</h2>
+    <p>Base64 encoding allows you to embed image data directly in your Markdown files without requiring external
+        hosting. This approach converts binary image data into a string of text that can be included directly in your
+        document.</p>
+
+    <a href="../base64-image-converter/" class="tool-button">Try Our Base64 Converter Tool →</a>
+
+    <h2 id="basic-syntax">Basic Syntax</h2>
+    <p>To embed a base64 image in Markdown, use this syntax:</p>
+    <pre><code>![Alt text](data:image/png;base64,YOUR_BASE64_STRING)</code></pre>
+
+    <div class="example">
+        <h4>Example:</h4>
+        <pre><code>![Logo](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...)</code></pre>
+    </div>
+
+    <h2 id="image-types">Supported Image Types</h2>
+    <table>
+        <tr>
+            <th>Image Type</th>
+            <th>MIME Type</th>
+            <th>Usage</th>
+        </tr>
+        <tr>
+            <td>PNG</td>
+            <td><code>data:image/png;base64,</code></td>
+            <td>Best for screenshots, logos, and images with transparency</td>
+        </tr>
+        <tr>
+            <td>JPEG</td>
+            <td><code>data:image/jpeg;base64,</code></td>
+            <td>Ideal for photographs and complex images</td>
+        </tr>
+        <tr>
+            <td>GIF</td>
+            <td><code>data:image/gif;base64,</code></td>
+            <td>Suitable for simple animations</td>
+        </tr>
+        <tr>
+            <td>SVG</td>
+            <td><code>data:image/svg+xml;base64,</code></td>
+            <td>Perfect for scalable vector graphics</td>
+        </tr>
+    </table>
+
+    <h2 id="conversion-methods">Converting Images to Base64</h2>
+    <h3>1. Using Our Online Tool</h3>
+    <p>The simplest method is to use our converter tool:</p>
+    <ol>
+        <li>Click the button above to open the converter</li>
+        <li>Upload or drag your image</li>
+        <li>Copy the generated Markdown code</li>
+    </ol>
+
+    <h3>2. Using Command Line</h3>
+    <pre><code># On macOS/Linux
+base64 image.png | pbcopy
+
+# On Windows PowerShell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("image.png")) | clip</code></pre>
+
+    <h3>3. Using Browser DevTools</h3>
+    <ol>
+        <li>Open your browser's DevTools (F12)</li>
+        <li>In the Console tab, paste and modify this code:</li>
+    </ol>
+    <pre><code>const file = document.querySelector('input[type="file"]').files[0];
+const reader = new FileReader();
+reader.onload = () => console.log(reader.result);
+reader.readAsDataURL(file);</code></pre>
+
+    <h2 id="best-practices">Best Practices</h2>
+    <div class="warning">
+        <strong>Important:</strong> Base64 encoding increases file size by approximately 33%. Consider these guidelines
+        when using base64 images.
+    </div>
+
+    <ul>
+        <li><strong>File Size:</strong> Ideal for small images (under 50KB)</li>
+        <li><strong>Image Optimization:</strong> Compress images before converting to base64</li>
+        <li><strong>Usage:</strong> Best for:
+            <ul>
+                <li>Small icons and logos</li>
+                <li>Simple diagrams</li>
+                <li>Offline documentation</li>
+                <li>Self-contained documents</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2 id="limitations">Limitations and Considerations</h2>
+    <table>
+        <tr>
+            <th>Consideration</th>
+            <th>Details</th>
+        </tr>
+        <tr>
+            <td>File Size</td>
+            <td>Base64 encoding increases file size by ~33%</td>
+        </tr>
+        <tr>
+            <td>Caching</td>
+            <td>Base64 images can't be cached separately by browsers</td>
+        </tr>
+        <tr>
+            <td>Platform Support</td>
+            <td>Some Markdown processors may have size limitations</td>
+        </tr>
+    </table>
+
+    <h2 id="troubleshooting">Common Issues and Solutions</h2>
+    <table>
+        <tr>
+            <th>Issue</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>Image not displaying</td>
+            <td>
+                <ul>
+                    <li>Verify the correct MIME type is used</li>
+                    <li>Check for complete base64 string</li>
+                    <li>Ensure no line breaks in the base64 string</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>File too large</td>
+            <td>
+                <ul>
+                    <li>Compress image before converting</li>
+                    <li>Reduce image dimensions</li>
+                    <li>Consider using external hosting instead</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

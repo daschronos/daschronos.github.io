@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Image Converter</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --background: #f8fafc;
+            --text: #1e293b;
+            --code-bg: #f1f5f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: var(--primary);
+            padding: 1rem 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .converter-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--primary);
+        }
+
+        .drop-zone.active {
+            border-color: var(--primary);
+            background: #f0f9ff;
+        }
+
+        .output-area {
+            margin-top: 2rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background: var(--secondary);
+        }
+
+        .preview {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">← Back to Guide</a>
+    </nav>
+
+    <div class="container">
+        <div class="converter-box">
+            <h1>Base64 Image Converter</h1>
+            <p>Drop an image or click to select a file to convert it to base64 format.</p>
+
+            <div class="drop-zone" id="dropZone">
+                <p>Drop image here or click to upload</p>
+                <input type="file" id="fileInput" accept="image/*" style="display: none">
+            </div>
+
+            <div class="output-area" style="display: none" id="outputArea">
+                <h2>Generated Markdown</h2>
+                <textarea id="output" readonly></textarea>
+                <button id="copyButton">Copy to Clipboard</button>
+
+                <div class="preview">
+                    <h3>Preview</h3>
+                    <img id="previewImage" alt="Preview">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const output = document.getElementById('output');
+        const outputArea = document.getElementById('outputArea');
+        const copyButton = document.getElementById('copyButton');
+        const previewImage = document.getElementById('previewImage');
+
+        // Handle drag and drop events
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight(e) {
+            dropZone.classList.add('active');
+        }
+
+        function unhighlight(e) {
+            dropZone.classList.remove('active');
+        }
+
+        // Handle file selection
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFile);
+        dropZone.addEventListener('drop', handleDrop);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        function handleFile(e) {
+            const files = this.files;
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const base64String = e.target.result;
+                        output.value = `![${file.name}](${base64String})`;
+                        previewImage.src = base64String;
+                        outputArea.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please upload an image file.');
+                }
+            }
+        }
+
+        // Handle copy to clipboard
+        copyButton.addEventListener('click', () => {
+            output.select();
+            document.execCommand('copy');
+            const originalText = copyButton.textContent;
+            copyButton.textContent = 'Copied!';
+            setTimeout(() => {
+                copyButton.textContent = originalText;
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

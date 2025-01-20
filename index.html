@@ -4,17 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adding Images to Markdown - A Complete Guide</title>
+    <title>Base64 Images in Markdown Guide</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --text-color: #1f2937;
-            --background-color: #ffffff;
-            --code-background: #f3f4f6;
-            --border-color: #e5e7eb;
-            --warning-background: #fff7ed;
-            --warning-border: #fdba74;
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --background: #f8fafc;
+            --text: #1e293b;
+            --code-bg: #f1f5f9;
         }
 
         * {
@@ -24,251 +21,169 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: var(--background-color);
+            color: var(--text);
+            background: var(--background);
         }
 
-        h1,
-        h2,
-        h3,
-        h4 {
-            color: var(--primary-color);
-            margin: 1.5rem 0 1rem;
-            line-height: 1.2;
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
         h1 {
             font-size: 2.5rem;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         h2 {
-            font-size: 2rem;
-            margin-top: 3rem;
-        }
-
-        h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: var(--secondary);
         }
 
         p {
             margin-bottom: 1.5rem;
         }
 
-        pre {
-            background-color: var(--code-background);
+        .step {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-block {
+            background: var(--code-bg);
             padding: 1rem;
-            border-radius: 0.5rem;
+            border-radius: 8px;
             overflow-x: auto;
             margin: 1rem 0;
         }
 
-        code {
-            font-family: 'Monaco', 'Consolas', monospace;
-            background-color: var(--code-background);
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.25rem;
-            font-size: 0.9em;
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        pre code {
-            padding: 0;
-            background: none;
+        .benefit-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .example {
-            border-left: 4px solid var(--primary-color);
-            padding: 1rem;
-            margin: 1.5rem 0;
-            background-color: var(--code-background);
+        .highlight {
+            color: var(--primary);
+            font-weight: bold;
         }
 
-        .example h4 {
-            margin-top: 0;
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .warning {
-            background-color: var(--warning-background);
-            border: 1px solid var(--warning-border);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-        }
-
-        th,
-        td {
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            text-align: left;
-        }
-
-        th {
-            background-color: var(--code-background);
-        }
-
-        ul,
-        ol {
-            margin: 1rem 0;
-            padding-left: 2rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        td ul {
-            margin: 0;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            h3 {
-                font-size: 1.25rem;
-            }
-
-            table {
-                display: block;
-                overflow-x: auto;
-            }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 
 <body>
-    <h1>Adding Images to Markdown: A Complete Guide</h1>
+    <header>
+        <h1>Base64 Images in Markdown</h1>
+        <p>A guide to embedding images directly in your Markdown files</p>
+        <a href="base64-image-converter/index.html" class="cta-button">Try the Converter Tool →</a>
+    </header>
 
-    <h2 id="basic-syntax">Basic Syntax</h2>
-    <p>In Markdown, you can add images using two methods:</p>
+    <main class="container">
+        <div class="benefits">
+            <div class="benefit-card">
+                <h3>🚀 No External Dependencies</h3>
+                <p>Keep your images directly in your Markdown files without relying on external hosting services.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>🔒 Enhanced Privacy</h3>
+                <p>Your images remain private and under your control, not stored on third-party servers.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>⚡ Always Available</h3>
+                <p>Images load reliably without concerns about external service availability.</p>
+            </div>
+        </div>
 
-    <h3>1. Inline Image Syntax</h3>
-    <pre><code>![Alt text](URL)</code></pre>
-    <p>Where:</p>
-    <ul>
-        <li><code>Alt text</code> is the alternative text description of the image</li>
-        <li><code>URL</code> is the path to your image</li>
-    </ul>
+        <section class="step">
+            <h2>Step 1: Convert Your Image</h2>
+            <p>First, you'll need to convert your image to a base64 string. You can do this using:</p>
+            <ul>
+                <li><a href="base64-image-converter/index.html">Our online converter tool</a></li>
+                <li>Browser DevTools Console</li>
+                <li>Command line tools</li>
+            </ul>
+            <div class="code-block">
+                <code>
+                    # Using command line (macOS/Linux)<br>
+                    base64 image.png | pbcopy
+                </code>
+            </div>
+        </section>
 
-    <div class="example">
-        <h4>Example:</h4>
-        <pre><code>![My Profile Picture](https://example.com/images/profile.jpg)</code></pre>
-    </div>
+        <section class="step">
+            <h2>Step 2: Format the Markdown</h2>
+            <p>Use this syntax to embed your base64 image in Markdown:</p>
+            <div class="code-block">
+                <code>![Alt text](data:image/png;base64,YOUR_BASE64_STRING)</code>
+            </div>
+            <p>Replace <code>YOUR_BASE64_STRING</code> with your actual base64-encoded image data.</p>
+        </section>
 
-    <h3>2. Reference-Style Syntax</h3>
-    <pre><code>![Alt text][image-id]
-[image-id]: URL</code></pre>
+        <section class="step">
+            <h2>Step 3: Best Practices</h2>
+            <p>Keep these tips in mind:</p>
+            <ul>
+                <li>Use base64 for small images (under 50KB) to keep your Markdown files manageable</li>
+                <li>Consider using standard image hosting for larger files</li>
+                <li>Always include meaningful alt text for accessibility</li>
+                <li>Compress images before converting to base64 to reduce file size</li>
+            </ul>
+        </section>
 
-    <div class="example">
-        <h4>Example:</h4>
-        <pre><code>![Profile Picture][profile]
-[profile]: https://example.com/images/profile.jpg</code></pre>
-    </div>
-
-    <h2 id="image-paths">Image Paths</h2>
-    <table>
-        <tr>
-            <th>Type</th>
-            <th>Example</th>
-            <th>Usage</th>
-        </tr>
-        <tr>
-            <td>Absolute URL</td>
-            <td><code>https://example.com/image.jpg</code></td>
-            <td>Web-hosted images</td>
-        </tr>
-        <tr>
-            <td>Relative Path</td>
-            <td><code>./images/picture.jpg</code></td>
-            <td>Local repository images</td>
-        </tr>
-        <tr>
-            <td>Root Relative</td>
-            <td><code>/images/picture.jpg</code></td>
-            <td>From repository root</td>
-        </tr>
-    </table>
-
-    <h2>Adding Title Text</h2>
-    <p>You can add a title that appears when hovering over the image:</p>
-    <pre><code>![Alt text](URL "Image title")</code></pre>
-
-    <div class="example">
-        <h4>Example:</h4>
-        <pre><code>![Profile Picture](profile.jpg "My Profile Picture from 2023")</code></pre>
-    </div>
-
-    <h2 id="advanced-features">Advanced Features</h2>
-    <h3>Image Size (HTML)</h3>
-    <p>While pure Markdown doesn't support image sizing, you can use HTML:</p>
-    <pre><code>&lt;img src="image.jpg" alt="Alt text" width="200" height="100"&gt;</code></pre>
-
-    <h3>Image Alignment</h3>
-    <p>Using HTML and CSS:</p>
-    <pre><code>&lt;img align="right" src="image.jpg" alt="Alt text"&gt;</code></pre>
-
-    <div class="warning">
-        <strong>Note:</strong> Not all Markdown processors support HTML. Check your platform's documentation for
-        compatibility.
-    </div>
-
-    <h2>Best Practices</h2>
-    <ul>
-        <li>Always provide meaningful alt text for accessibility</li>
-        <li>Use relative paths for repository images</li>
-        <li>Optimize images before adding them</li>
-        <li>Consider image size and loading time</li>
-        <li>Use consistent naming conventions</li>
-    </ul>
-
-    <h2>Common Issues and Solutions</h2>
-    <table>
-        <tr>
-            <th>Issue</th>
-            <th>Solution</th>
-        </tr>
-        <tr>
-            <td>Image not displaying</td>
-            <td>
-                <ul>
-                    <li>Check URL/path spelling</li>
-                    <li>Verify file exists</li>
-                    <li>Ensure proper permissions</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>Broken image links</td>
-            <td>
-                <ul>
-                    <li>Use relative paths for local images</li>
-                    <li>Verify image hosting service availability</li>
-                </ul>
-            </td>
-        </tr>
-    </table>
+        <section class="step">
+            <h2>Example</h2>
+            <p>Here's a complete example of an embedded base64 image:</p>
+            <div class="code-block">
+                <code>
+                    ![Small Logo](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...)</code>
+            </div>
+        </section>
+    </main>
 </body>
 
 </html>
