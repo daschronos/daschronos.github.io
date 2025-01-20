@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding Images to Markdown - A Complete Guide</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .example {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        h2 {
+            margin-top: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Adding Images to Markdown: A Complete Guide</h1>
+
+    <h2>Basic Syntax</h2>
+    <p>In Markdown, you can add images using two methods:</p>
+
+    <h3>1. Inline Image Syntax</h3>
+    <pre><code>![Alt text](URL)</code></pre>
+    <p>Where:</p>
+    <ul>
+        <li><code>Alt text</code> is the alternative text description of the image</li>
+        <li><code>URL</code> is the path to your image</li>
+    </ul>
+
+    <div class="example">
+        <h4>Example:</h4>
+        <pre><code>![My Profile Picture](https://example.com/images/profile.jpg)</code></pre>
+    </div>
+
+    <h3>2. Reference-Style Syntax</h3>
+    <pre><code>![Alt text][image-id]
+
+[image-id]: URL</code></pre>
+
+    <div class="example">
+        <h4>Example:</h4>
+        <pre><code>![Profile Picture][profile]
+
+[profile]: https://example.com/images/profile.jpg</code></pre>
+    </div>
+
+    <h2>Image Paths</h2>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Example</th>
+            <th>Usage</th>
+        </tr>
+        <tr>
+            <td>Absolute URL</td>
+            <td><code>https://example.com/image.jpg</code></td>
+            <td>Web-hosted images</td>
+        </tr>
+        <tr>
+            <td>Relative Path</td>
+            <td><code>./images/picture.jpg</code></td>
+            <td>Local repository images</td>
+        </tr>
+        <tr>
+            <td>Root Relative</td>
+            <td><code>/images/picture.jpg</code></td>
+            <td>From repository root</td>
+        </tr>
+    </table>
+
+    <h2>Adding Title Text</h2>
+    <p>You can add a title that appears when hovering over the image:</p>
+    <pre><code>![Alt text](URL "Image title")</code></pre>
+
+    <div class="example">
+        <h4>Example:</h4>
+        <pre><code>![Profile Picture](profile.jpg "My Profile Picture from 2023")</code></pre>
+    </div>
+
+    <h2>Advanced Features</h2>
+
+    <h3>Image Size (HTML)</h3>
+    <p>While pure Markdown doesn't support image sizing, you can use HTML:</p>
+    <pre><code>&lt;img src="image.jpg" alt="Alt text" width="200" height="100"&gt;</code></pre>
+
+    <h3>Image Alignment</h3>
+    <p>Using HTML and CSS:</p>
+    <pre><code>&lt;img align="right" src="image.jpg" alt="Alt text"&gt;</code></pre>
+
+    <div class="warning">
+        <strong>Note:</strong> Not all Markdown processors support HTML. Check your platform's documentation for
+        compatibility.
+    </div>
+
+    <h2>Best Practices</h2>
+    <ul>
+        <li>Always provide meaningful alt text for accessibility</li>
+        <li>Use relative paths for repository images</li>
+        <li>Optimize images before adding them</li>
+        <li>Consider image size and loading time</li>
+        <li>Use consistent naming conventions</li>
+    </ul>
+
+    <h2>Common Issues and Solutions</h2>
+    <table>
+        <tr>
+            <th>Issue</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>Image not displaying</td>
+            <td>
+                <ul>
+                    <li>Check URL/path spelling</li>
+                    <li>Verify file exists</li>
+                    <li>Ensure proper permissions</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Broken image links</td>
+            <td>
+                <ul>
+                    <li>Use relative paths for local images</li>
+                    <li>Verify image hosting service availability</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
